@@ -2,12 +2,12 @@ from abc import ABC, abstractmethod
 from typing import Type
 
 from db.db import async_session_maker
-from repositories.users import UsersRepository
+# from repositories.users import UsersRepository
 
 
 # https://github1s.com/cosmicpython/code/tree/chapter_06_uow
 class IUnitOfWork(ABC):
-    users: Type[UsersRepository]
+    # users: Type[UsersRepository]
     
     @abstractmethod
     def __init__(self):
@@ -36,7 +36,7 @@ class UnitOfWork:
 
     async def __aenter__(self):
         self.session = self.session_factory()
-        self.users = UsersRepository(self.session)  # Your users repository
+        # self.users = UsersRepository(self.session)  # Your users repository
 
     async def __aexit__(self, *args):
         await self.rollback()
